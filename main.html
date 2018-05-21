@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+
+<title>
+Hi
+</title>
+
+<style>
+
+</style>
+
+</head>
+
+
+
+<body>
+
+<h1>Test</h1>
+
+<button>Change bgcolor</button>
+
+<script>
+
+var btn = document.querySelector('button');
+
+function random(number){
+	return Math.floor(Math.random()*(number+1));
+}
+
+btn.onclick = function bgChange(e){
+	
+	var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+	document.body.style.backgroundColor = rndCol;
+
+}
+
+</script>
+
+
+
+</body>
+
+
+</html>
