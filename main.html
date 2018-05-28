@@ -1,48 +1,66 @@
 <!DOCTYPE html>
-
-<html>
-
-
 <head>
-
-<title>
-Hi
-</title>
-
-<style>
-
-</style>
-
+<title>Hej</title>
 </head>
-
-
-
 <body>
 
-<h1>Test</h1>
-
-<button>Change bgcolor</button>
+<canvas id="MainCanvas"></canvas>
+</canvas>
 
 <script>
 
-var btn = document.querySelector('button');
+var canvas = document.getElementById("MainCanvas");			//tworzenie canvas
+var ctx = canvas.getContext("2d");							//2d, t.z. plaszczyzna
 
-function random(number){
+var c_width = document.documentElement.clientWidth;
+var c_height = document.documentElement.clientHeight;
+
+canvas.setAttribute("width", c_width);			//dopasowanie rozmiaru canvasu do rozmiaru okna
+canvas.setAttribute("height", c_height);
+canvas.style.background = "black";
+
+
+var ballRadius = 10;										//rozmiar pilki
+var x = canvas.width/2;										//polozenia poczatkowe 
+var y = canvas.height-10;
+var vx = 2;													//predkosc
+var vy = -2;
+
+function random(number){									//funkcja generujaca losowy liczby
 	return Math.floor(Math.random()*(number+1));
 }
 
-btn.onclick = function bgChange(e){
-	
-	var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
-	document.body.style.backgroundColor = rndCol;
-
+function rndColor(){
+rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';	//zmienna rndCol jaka generuje losowyj kolor
+return rndCol;
 }
 
+function drawBall() {										//namalowac pilku
+    ctx.beginPath();										//tworzenie szlaku
+    ctx.arc(x, y, ballRadius, 0, Math.PI*2);				//tworzenie pilki na canvas
+    ctx.fillStyle = rndCol;									//kolor pilki (losowyj)
+    ctx.fill();												//zastosowanie koloru
+    ctx.closePath();
+}
+
+function draw() {											//glowna funkcja
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	rndColor();
+    drawBall();
+
+    if(x + vx > canvas.width-ballRadius || x + vx < ballRadius) {	//odbicie od scian
+        vx = -vx;
+    }
+    if(y + vy > canvas.height-ballRadius || y + vy < ballRadius) {
+        vy = -vy;
+    }
+    
+    x += vx;														//zmiana polozenia
+    y += vy;
+}
+
+setInterval(draw, 10);												//powtorzenie funkcji
+
 </script>
-
-
-
 </body>
-
-
 </html>
