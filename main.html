@@ -25,9 +25,13 @@ canvas.style.background = "black";
 
 var ballRadius = 10;										//rozmiar pilki
 var x = canvas.width/2;										//polozenia poczatkowe 
-var y = canvas.height-10;
+var y = canvas.height-20;
 var vx = 2;													//predkosc
 var vy = -2;
+
+var paddle_h = 10;											//ustawienia rozmiaru plaszczyzny dla odbicia
+var paddle_w = 125;
+var paddle_x = (canvas.width - paddle_w)/2;					//wspol. y nie jest potrzebny(chyba)
 
 function random(number){									//funkcja generujaca losowy liczby
 	return Math.floor(Math.random()*(number+1));
@@ -41,16 +45,25 @@ return rndCol;
 function drawBall() {										//namalowac pilku
     ctx.beginPath();										//tworzenie szlaku
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);				//tworzenie pilki na canvas
-    ctx.fillStyle = rndCol;									//kolor pilki (losowyj)
+    ctx.fillStyle = rndColor();								//kolor pilki (losowyj)
     ctx.fill();												//zastosowanie koloru
     ctx.closePath();
 }
 
-function draw() {											//glowna funkcja
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-	rndColor();
-    drawBall();
+function drawPaddle() {										//namalowac plaszczyznu
+    ctx.beginPath();
+    ctx.rect(paddle_x, canvas.height - paddle_h, paddle_w, paddle_h);
+    ctx.fillStyle = "#FF0000";
+    ctx.fill();
+    ctx.closePath();
+}
 
+function draw() {													//glowna funkcja
+										
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	drawPaddle();
+    drawBall();
+	
     if(x + vx > canvas.width-ballRadius || x + vx < ballRadius) {	//odbicie od scian
         vx = -vx;
     }
@@ -60,6 +73,7 @@ function draw() {											//glowna funkcja
     
     x += vx;														//zmiana polozenia
     y += vy;
+	
 }
 
 setInterval(draw, 10);												//powtorzenie funkcji
