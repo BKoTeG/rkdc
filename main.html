@@ -71,12 +71,10 @@ function draw() {													//glowna funkcja
         vy = -vy;
     }
 	
-	if(x + vx >= (paddle_x + (paddle_w/2)) || x + vx >= (paddle_x - (paddle_w/2))) { //jeszcze zastanawiam nad plaszczyzna, ale to jest zle
-        vx = -vx;
-    }
-	if(y + vy >= (paddle_x + (paddle_w/2)) || y + vy >= (paddle_x - (paddle_w/2))) {
+	if(x > paddle_x && x < paddle_x + paddle_w) {
         vy = -vy;
     }
+
     
     x += vx;														//zmiana polozenia
     y += vy;
