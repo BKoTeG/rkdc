@@ -12,8 +12,11 @@
 var canvas = document.getElementById("MainCanvas");			//tworzenie canvas
 var ctx = canvas.getContext("2d");							//2d, t.z. plaszczyzna
 
-var c_width = document.documentElement.clientWidth;
-var c_height = document.documentElement.clientHeight;
+var temp_w = document.documentElement.clientWidth / 8;		//dynamicznie dopasowanie rozmiaru
+var temp_h = document.documentElement.clientHeight / 16;
+
+var c_width = document.documentElement.clientWidth - temp_w;
+var c_height = document.documentElement.clientHeight - temp_h;
 
 canvas.setAttribute("width", c_width);			//dopasowanie rozmiaru canvasu do rozmiaru okna
 canvas.setAttribute("height", c_height);
