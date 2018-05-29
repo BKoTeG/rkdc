@@ -25,12 +25,12 @@ canvas.style.background = "black";
 
 var ballRadius = 10;										//rozmiar pilki
 var x = canvas.width/2;										//polozenia poczatkowe 
-var y = canvas.height-20;
+var y = canvas.height-25;
 var vx = 2;													//predkosc
 var vy = -2;
 
 var paddle_h = 10;											//ustawienia rozmiaru plaszczyzny dla odbicia
-var paddle_w = 125;
+var paddle_w = 120;
 var paddle_x = (canvas.width - paddle_w)/2;					//wspol. y nie jest potrzebny(chyba)
 
 function random(number){									//funkcja generujaca losowy liczby
@@ -64,10 +64,17 @@ function draw() {													//glowna funkcja
 	drawPaddle();
     drawBall();
 	
-    if(x + vx > canvas.width-ballRadius || x + vx < ballRadius) {	//odbicie od scian
+    if(x + vx > canvas.width - ballRadius || x + vx < ballRadius) {	//odbicie od scian
         vx = -vx;
     }
-    if(y + vy > canvas.height-ballRadius || y + vy < ballRadius) {
+    if(y + vy > canvas.height - ballRadius || y + vy < ballRadius) {
+        vy = -vy;
+    }
+	
+	if(x + vx >= (paddle_x + (paddle_w/2)) || x + vx >= (paddle_x - (paddle_w/2))) { //jeszcze zastanawiam nad plaszczyzna, ale to jest zle
+        vx = -vx;
+    }
+	if(y + vy >= (paddle_x + (paddle_w/2)) || y + vy >= (paddle_x - (paddle_w/2))) {
         vy = -vy;
     }
     
