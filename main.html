@@ -7,7 +7,22 @@
 <canvas id="MainCanvas"></canvas>
 </canvas>
 
+<audio id="BgAudio" autoplay="autoplay" loop></audio> 
+
+<button id="onoff" type="button">Muzyka on/off</button>
+<button id="next" type="button">Nastepna piosenka</button>
+
 <script>
+var bgm = document.getElementById("BgAudio"); 				//bgaudio
+bgm.volume = 0.02;
+bgm.src = "http://catcut.net/QDyv";
+
+var mute = document.getElementById("onoff");				//pocisk dla muzyki on/off
+var i = 1;
+
+var nextS = document.getElementById("next");				//nastepna piosenka
+var S = 1;
+var list = ["http://catcut.net/QDyv" , "http://f.marvarid.net/mp3/Rus/Thomas_Mraz_-_Ya_Protiv_Vseh.mp3" , "http://f.marvarid.net/mp3/Rus/Gryaznyj_Ramires_-_Magnitude.mp3" , "http://f.marvarid.net/mp3/Rus/Gazirovka_-_Black.mp3"];
 
 var canvas = document.getElementById("MainCanvas");			//tworzenie canvas
 var ctx = canvas.getContext("2d");							//2d, t.z. plaszczyzna
@@ -32,6 +47,23 @@ var vy = -2;
 var paddle_h = 20;											//ustawienia rozmiaru plaszczyzny dla odbicia
 var paddle_w = 340;
 var paddle_x = (canvas.width - paddle_w)/2;					//wspol.; y nie jest potrzebny(chyba)
+
+
+mute.onclick = function(){									//funkcja do on/off muzyki
+	if (i%2==1){
+	bgm.volume = 0.0; 
+	}
+	else{
+	bgm.volume = 0.02; 
+	}
+	i++;
+}
+
+nextS.onclick = function(){									//funkcja dla wloczenia nastepnej piosenki
+	bgm.src = list[S];
+	S++;
+	if (S==4){S=0}
+}
 
 function playAudio(){										//funkcja dzwieku
 	var myAudio = new Audio;
@@ -65,7 +97,7 @@ function drawPaddle() {										//namalowac plaszczyznu
 }
 
 function draw() {													//glowna funkcja
-										
+				
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	drawPaddle();
     drawBall();
@@ -86,6 +118,7 @@ function draw() {													//glowna funkcja
 	
 	x += vx;														//zmiana polozenia
     y += vy;
+	
 }
 
 setInterval(draw, 10);												//powtorzenie funkcji
