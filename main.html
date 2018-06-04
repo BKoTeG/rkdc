@@ -33,6 +33,12 @@ var paddle_h = 20;											//ustawienia rozmiaru plaszczyzny dla odbicia
 var paddle_w = 340;
 var paddle_x = (canvas.width - paddle_w)/2;					//wspol.; y nie jest potrzebny(chyba)
 
+function playAudio(){										//funkcja dzwieku
+	var myAudio = new Audio;
+	myAudio.src = "https://sound-pack.net/download/Sound_11994.wav";
+	myAudio.play();
+}
+
 function random(number){									//funkcja generujaca losowy liczby
 	return Math.floor(Math.random()*(number+1));
 }
@@ -74,6 +80,7 @@ function draw() {													//glowna funkcja
 	if(y + vy > (canvas.height - paddle_h - ballRadius)){			//odbicie od plaszczyzny (juz dobrze dziala)
 		if(x > paddle_x && x < paddle_x + paddle_w){
 			vy = -vy;
+			playAudio();											//dzwiek przy dotyku plaszczyzny
 		}
 	}
 	
