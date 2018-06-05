@@ -103,7 +103,7 @@ function drawPaddle() {										//namalowac plaszczyznu
 
 document.getElementById("MainCanvas").onmousemove = function(event) {moving(event)};	//funkcja dla kierowania plaszczyzna za pomocy myszy
 function moving(e) {
-    paddle_x = (e.clientX)/2;
+    paddle_x = e.clientX - (paddle_w/2);
 }
 
 function draw() {													//glowna funkcja
