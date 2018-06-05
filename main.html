@@ -37,9 +37,10 @@ var temp_h = document.documentElement.clientHeight / 16;
 var c_width = document.documentElement.clientWidth - temp_w;
 var c_height = document.documentElement.clientHeight - temp_h;
 
-canvas.setAttribute("width", c_width);			//dopasowanie rozmiaru canvasu do rozmiaru okna
+canvas.setAttribute("width", c_width);						//dopasowanie rozmiaru canvasu do rozmiaru okna
 canvas.setAttribute("height", c_height);
 canvas.style.background = "black";
+canvas.style.cursor = "none";								//wylaczenia kursoru
 
 
 var ballRadius = 10;										//rozmiar pilki
@@ -100,15 +101,13 @@ function drawPaddle() {										//namalowac plaszczyznu
     ctx.closePath();
 }
 
-document.getElementById("MainCanvas").onmousemove = function(event) {moving(event)};
-
+document.getElementById("MainCanvas").onmousemove = function(event) {moving(event)};	//funkcja dla kierowania plaszczyzna za pomocy myszy
 function moving(e) {
-    paddle_x = e.clientX;
+    paddle_x = (e.clientX)/2;
 }
 
 function draw() {													//glowna funkcja
 
-	
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	drawPaddle();
     drawBall();
