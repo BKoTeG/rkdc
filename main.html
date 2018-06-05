@@ -100,15 +100,15 @@ function drawPaddle() {										//namalowac plaszczyznu
     ctx.closePath();
 }
 
-paddle_x.onmousemove = function(event) {myFunction(event)};
+document.getElementById("MainCanvas").onmousemove = function(event) {moving(event)};
 
-function myFunction(e) {
-    var x = e.clientX;
-    
+function moving(e) {
+    paddle_x = e.clientX;
 }
 
 function draw() {													//glowna funkcja
-				
+
+	
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	drawPaddle();
     drawBall();
