@@ -23,7 +23,10 @@ var i = 1;
 
 var nextS = document.getElementById("next");				//nastepna piosenka
 var S = 1;
-var list = ["http://catcut.net/QDyv" , "http://f.marvarid.net/mp3/Rus/Thomas_Mraz_-_Ya_Protiv_Vseh.mp3" , "http://f.marvarid.net/mp3/Rus/Gryaznyj_Ramires_-_Magnitude.mp3" , "http://f.marvarid.net/mp3/Rus/Gazirovka_-_Black.mp3"];
+var list = ["http://catcut.net/QDyv" ,
+ "http://f.marvarid.net/mp3/Rus/Thomas_Mraz_-_Ya_Protiv_Vseh.mp3" ,
+ "http://f.marvarid.net/mp3/Rus/Gryaznyj_Ramires_-_Magnitude.mp3" , 
+ "http://f.marvarid.net/mp3/Rus/Gazirovka_-_Black.mp3"];
 
 var canvas = document.getElementById("MainCanvas");			//tworzenie canvas
 var ctx = canvas.getContext("2d");							//2d, t.z. plaszczyzna
@@ -77,8 +80,8 @@ function random(number){									//funkcja generujaca losowy liczby
 }
 
 function rndColor(){
-rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';	//zmienna rndCol jaka generuje losowyj kolor
-return rndCol;
+	rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';	//zmienna rndCol jaka generuje losowyj kolor
+	return rndCol;
 }
 
 function drawBall() {										//namalowac pilku
@@ -95,6 +98,13 @@ function drawPaddle() {										//namalowac plaszczyznu
     ctx.fillStyle = "#FF0000";
     ctx.fill();
     ctx.closePath();
+}
+
+paddle_x.onmousemove = function(event) {myFunction(event)};
+
+function myFunction(e) {
+    var x = e.clientX;
+    
 }
 
 function draw() {													//glowna funkcja
