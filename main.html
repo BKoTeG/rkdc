@@ -115,7 +115,8 @@ function draw() {													//glowna funkcja
 	if(x + vx > canvas.width - ballRadius || x + vx < ballRadius) {	//odbicie od scian
         vx = -vx;
     }
-    if(y + vy > canvas.height - ballRadius || y + vy < ballRadius) {
+	
+    if(y + vy < ballRadius) {
         vy = -vy;
     }
 	
@@ -124,7 +125,12 @@ function draw() {													//glowna funkcja
 			vy = -vy;
 			playAudio();											//dzwiek przy dotyku plaszczyzny
 		}
+		else if (y + vy > canvas.height-ballRadius){
+		alert("u lost");
+		}
 	}
+	
+
 	
 	x += vx;														//zmiana polozenia
     y += vy;
