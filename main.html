@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <head>
 <title>Hej</title>
+
+<link href="https://fonts.googleapis.com/css?family=Suez+One" rel="stylesheet">
+
+<style>
+
+</style>
 </head>
 <body>
 
@@ -14,6 +20,8 @@
 <button id="next" type="button">Nastepna piosenka</button>
 
 <script>
+var score = 0;												//punkty
+
 var bgm = document.getElementById("BgAudio"); 				//bgaudio
 bgm.volume = 0.1;
 bgm.src = "http://catcut.net/QDyv";
@@ -41,6 +49,10 @@ canvas.setAttribute("width", c_width);						//dopasowanie rozmiaru canvasu do ro
 canvas.setAttribute("height", c_height);
 canvas.style.background = "black";
 canvas.style.cursor = "none";								//wylaczenia kursoru
+
+var positionx = canvas.width/2;								//pozycja i rozmiar napisu "punkty:"
+var positiony = canvas.height/30;
+var sizeFont = (canvas.width+canvas.height)/109;
 
 var ballRadius = (canvas.height)*0.017;						//rozmiar pilki
 var x = (canvas.width)/2;									//polozenia poczatkowe 
@@ -149,12 +161,18 @@ function dotyk() {											//funkcja dotyku pilki do cegly
           vy = -vy;
           b.temp = 0;
 		  playAudio();
+		  score++;
         }
       }
     }
   }
 }
 
+function drawScore() {												//namalowac punkty na canvas
+    ctx.font = sizeFont + "px Suez One";
+    ctx.fillStyle = "white";
+    ctx.fillText("Punkty: " + score, positionx, positiony);
+}
 
 function draw() {													//glowna funkcja
 
@@ -163,6 +181,7 @@ function draw() {													//glowna funkcja
     drawBall();
 	drawCegly();
 	dotyk();
+	drawScore();
 	
 	if(x + vx > canvas.width - ballRadius || x + vx < ballRadius) {	//odbicie od scian
         vx = -vx;
