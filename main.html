@@ -14,7 +14,6 @@
 <body>
 
 <canvas id="MainCanvas"></canvas>
-</canvas>
 
 <audio id="BgAudio" autoplay="autoplay" loop></audio> 
 
@@ -182,6 +181,12 @@ function drawScore() {												//namalowac punkty na canvas
     ctx.fillText("Punkty: " + score, positionx, positiony);
 }
 
+function drawZycie() {												//namalowac zycia na canvas
+    ctx.font = sizeFont + "px Suez One";
+    ctx.fillStyle = "white";
+    ctx.fillText("Zycia: " + zycie, positionx-(canvas.width)/12, positiony);
+}
+
 function draw() {													//glowna funkcja
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -190,6 +195,7 @@ function draw() {													//glowna funkcja
 	drawCegly();
 	dotyk();
 	drawScore();
+	drawZycie();
 	
 	if(x + vx > canvas.width - ballRadius || x + vx < ballRadius) {	//odbicie od scian
         vx = -vx;
