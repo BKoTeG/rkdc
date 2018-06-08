@@ -31,8 +31,8 @@ var list = ["http://catcut.net/QDyv" ,
 var canvas = document.getElementById("MainCanvas");			//tworzenie canvas
 var ctx = canvas.getContext("2d");							//2d, t.z. plaszczyzna
 
-var temp_w = document.documentElement.clientWidth / 8;		//dynamicznie dopasowanie rozmiaru
-var temp_h = document.documentElement.clientHeight / 12;
+let temp_w = document.documentElement.clientWidth / 8;		//dynamicznie dopasowanie rozmiaru
+let temp_h = document.documentElement.clientHeight / 12;
 
 var c_width = document.documentElement.clientWidth - temp_w;
 var c_height = document.documentElement.clientHeight - temp_h;
@@ -42,11 +42,11 @@ canvas.setAttribute("height", c_height);
 canvas.style.background = "black";
 canvas.style.cursor = "none";								//wylaczenia kursoru
 
-var ballRadius = (canvas.height)*0.017;										//rozmiar pilki
-var x = (canvas.width)/2;										//polozenia poczatkowe 
+var ballRadius = (canvas.height)*0.017;						//rozmiar pilki
+var x = (canvas.width)/2;									//polozenia poczatkowe 
 var y = (canvas.height)-30;
-var vx = 2;													//predkosc
-var vy = -2;
+var vx = (canvas.height)*0.004;								//predkosc dynamicznie zalezaca od rozmiaru okna
+var vy = -(canvas.height)*0.004;
 
 var paddle_h = (canvas.height)/34;							//dynamicznie ustawienia rozmiaru plaszczyzny dla odbicia
 var paddle_w = (canvas.width)/10;
