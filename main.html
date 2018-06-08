@@ -24,6 +24,7 @@
 
 <script>
 var score = 0;												//punkty
+var zycie = 2;
 
 var bgm = document.getElementById("BgAudio"); 				//bgaudio
 bgm.volume = 0.1;
@@ -198,13 +199,20 @@ function draw() {													//glowna funkcja
         vy = -vy;
     }
 	
-	if(y + vy > (canvas.height - paddle_h - ballRadius)){			//odbicie od plaszczyzny (juz dobrze dziala)
+	if(y + vy > (canvas.height - paddle_h - ballRadius)){			//odbicie od plaszczyzny 
 		if(x > paddle_x && x < paddle_x + paddle_w){
 			vy = -vy;											
 		}
 		else if (y + vy > canvas.height-ballRadius){
-		alert("u lost");
-		document.location.reload();
+		zycie--;													//2 zycia (gdy pilka potrafi nie na plaszczyznu)
+		x = (canvas.width)/2;
+		y = (canvas.height)-30;
+		vx = (canvas.height)*0.004;	
+		vy = -(canvas.height)*0.004;	
+			if(zycie===0){
+			alert("u lost");
+			document.location.reload();
+			}
 		}
 	}
 	
