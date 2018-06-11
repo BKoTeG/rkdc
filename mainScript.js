@@ -18,7 +18,7 @@ var list = [
 var canvas = document.getElementById("MainCanvas");			//tworzenie canvas
 var ctx = canvas.getContext("2d");							//2d, t.z. plaszczyzna
 
-let temp_w = document.documentElement.clientWidth / 8;		//dynamicznie dopasowanie rozmiaru
+let temp_w = document.documentElement.clientWidth / 14;		//dynamicznie dopasowanie rozmiaru
 let temp_h = document.documentElement.clientHeight / 12;
 
 var c_width = document.documentElement.clientWidth - temp_w;
