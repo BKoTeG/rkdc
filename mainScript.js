@@ -1,58 +1,59 @@
-var score = 0;												//punkty
-var zycie = 2;
+let score = 0;												//punkty
+let zycie = 2;
 
-var bgm = document.getElementById("BgAudio"); 				//bgaudio
+const bgm = document.getElementById("BgAudio"); 				//bgaudio
 bgm.volume = 0.1;
-bgm.src = "http://f.marvarid.net/mp3/Rus/Thomas_Mraz_-_Ya_Protiv_Vseh.mp3";
+bgm.src = "http://catcut.net/3ZEv";
 
-var mute = document.getElementById("onoff");				//pocisk dla muzyki on/off
-var i = 1;
+const mute = document.getElementById("onoff");				//pocisk dla muzyki on/off
+let i = 1;
 
-var nextS = document.getElementById("next");				//nastepna piosenka
-var S = 1;
-var list = [
+const nextS = document.getElementById("next");				//nastepna piosenka
+let S = 1;
+const list = [
+ "http://catcut.net/3ZEv",
  "http://f.marvarid.net/mp3/Rus/Thomas_Mraz_-_Ya_Protiv_Vseh.mp3" ,
  "http://f.marvarid.net/mp3/Rus/Gryaznyj_Ramires_-_Magnitude.mp3" , 
- "http://f.marvarid.net/mp3/Rus/Gazirovka_-_Black.mp3"];
+ "http://f.marvarid.net/mp3/Rus/Gazirovka_-_Black.mp3"
+ ];
 
-var canvas = document.getElementById("MainCanvas");			//tworzenie canvas
-var ctx = canvas.getContext("2d");							//2d, t.z. plaszczyzna
+const canvas = document.getElementById("MainCanvas");			//tworzenie canvas
+const ctx = canvas.getContext("2d");							//2d, t.z. plaszczyzna
 
 let temp_w = document.documentElement.clientWidth / 14;		//dynamicznie dopasowanie rozmiaru
 let temp_h = document.documentElement.clientHeight / 12;
 
-var c_width = document.documentElement.clientWidth - temp_w;
-var c_height = document.documentElement.clientHeight - temp_h;
+const c_width = document.documentElement.clientWidth - temp_w;
+const c_height = document.documentElement.clientHeight - temp_h;
 
 canvas.setAttribute("width", c_width);						//dopasowanie rozmiaru canvasu do rozmiaru okna
 canvas.setAttribute("height", c_height);
 canvas.style.background = "black";
 canvas.style.cursor = "none";								//wylaczenia kursoru
 
+const positionx = canvas.width/2;								//pozycja i rozmiar napisu "punkty i zycia"
+const positiony = canvas.height/30;
+const sizeFont = (canvas.width+canvas.height)/109;
 
-var positionx = canvas.width/2;								//pozycja i rozmiar napisu "punkty:"
-var positiony = canvas.height/30;
-var sizeFont = (canvas.width+canvas.height)/109;
+const ballRadius = (canvas.height)*0.017;						//rozmiar pilki
+let x = (canvas.width)/2;									//polozenia poczatkowe 
+let y = (canvas.height)-30;
+let vx = (canvas.height)*0.004;								//predkosc dynamicznie zalezaca od rozmiaru okna
+let vy = -(canvas.height)*0.004;
 
-var ballRadius = (canvas.height)*0.017;						//rozmiar pilki
-var x = (canvas.width)/2;									//polozenia poczatkowe 
-var y = (canvas.height)-30;
-var vx = (canvas.height)*0.004;								//predkosc dynamicznie zalezaca od rozmiaru okna
-var vy = -(canvas.height)*0.004;
+let paddle_h = (canvas.height)/34;							//dynamicznie ustawienia rozmiaru plaszczyzny dla odbicia
+let paddle_w = (canvas.width)/10;
+let paddle_x = (canvas.width - paddle_w)/2;					//wspol.; y nie jest potrzebny
 
-var paddle_h = (canvas.height)/34;							//dynamicznie ustawienia rozmiaru plaszczyzny dla odbicia
-var paddle_w = (canvas.width)/10;
-var paddle_x = (canvas.width - paddle_w)/2;					//wspol.; y nie jest potrzebny
+const ceglaWierszIlosc = 5;
+const ceglaColumnIlosc = (canvas.width - (((canvas.width)/24) + ((canvas.width)/96)*((canvas.width)/(canvas.width/12))))/(canvas.width/12); //dynamiczne dopasowanie Ilosci plaszczyzn
+const ceglaWidth = (canvas.width)/12;							//dynamicznie dopasowanie rozmiarow cegl i odstepow
+const ceglaHeight = (canvas.height)/32;
+const ceglaPadding = (canvas.width)/96;
+const ceglaOffsetTop = (canvas.height)/21;
+const ceglaOffsetLeft = (canvas.width)/28;
 
-var ceglaWierszIlosc = 5;
-var ceglaColumnIlosc = (canvas.width - (((canvas.width)/24) + ((canvas.width)/96)*((canvas.width)/(canvas.width/12))))/(canvas.width/12); //dynamiczne dopasowanie Ilosci plaszczyzn
-var ceglaWidth = (canvas.width)/12;							//dynamicznie dopasowanie rozmiaWiersz i odstepow
-var ceglaHeight = (canvas.height)/32;
-var ceglaPadding = (canvas.width)/96;
-var ceglaOffsetTop = (canvas.height)/21;
-var ceglaOffsetLeft = (canvas.width)/28;
-
-var cegly = [];												//tworzymy cegly
+let cegly = [];												//tworzymy cegly
 for(let c = 0; c<ceglaColumnIlosc; c++) {
     cegly[c] = [];
     for(let w = 0; w<ceglaWierszIlosc; w++) {
@@ -73,7 +74,7 @@ mute.onclick = function(){									//funkcja do on/off muzyki
 nextS.onclick = function(){									//funkcja dla wloczenia nastepnej piosenki
 	bgm.src = list[S];
 	S++;
-	if (S==3){S=0}
+	if (S==4){S=0}
 }
 
 function playAudio(){										//funkcja dzwieku
@@ -165,31 +166,26 @@ function drawZycie() {												//namalowac zycia na canvas
 }
 
 function draw() {													//glowna funkcja
-	
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 	drawPaddle();
     drawBall();
 	drawCegly();
 	dotyk();
 	drawScore();
-	drawZycie();
-	
-	
+	drawZycie();		
 	if(x + vx > canvas.width - ballRadius || x + vx < ballRadius) {	//odbicie od scian
         vx = -vx;
-    }
-	
+    }	
     if(y + vy < ballRadius) {
         vy = -vy;
-    }
-	
+    }	
 	if(y + vy > (canvas.height - paddle_h - ballRadius)){			//odbicie od plaszczyzny 
 		if(x > paddle_x && x < paddle_x + paddle_w){
 			vy = -vy;											
 		}
 		else if (y + vy > canvas.height-ballRadius){
 		zycie--;													//2 zycia (gdy pilka potrafi nie na plaszczyznu)
-		x = (canvas.width)/2;
+		x = (canvas.width)/2;										//zwraca pilki na polozenie poczatkowe
 		y = (canvas.height)-30;
 		vx = (canvas.height)*0.004;	
 		vy = -(canvas.height)*0.004;	
@@ -199,10 +195,8 @@ function draw() {													//glowna funkcja
 			}
 		}
 	}
-	
 	x += vx;														//zmiana polozenia
-    y += vy;
-	
+    y += vy;	
 }
 
 setInterval(draw, 10);												//powtorzenie funkcji
