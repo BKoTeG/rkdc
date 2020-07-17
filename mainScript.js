@@ -1,21 +1,19 @@
 let score = 0;												//punkty
 let zycie = 2;
 
-const bgm = document.getElementById("BgAudio"); 				//bgaudio
-bgm.volume = 0.1;
-bgm.src = "http://catcut.net/3ZEv";
-
-const mute = document.getElementById("onoff");				//pocisk dla muzyki on/off
-let i = 1;
-
 const nextS = document.getElementById("next");				//nastepna piosenka
 let S = 1;
 const list = [
- "http://catcut.net/3ZEv",
- "http://f.marvarid.net/mp3/Rus/Thomas_Mraz_-_Ya_Protiv_Vseh.mp3" ,
- "http://f.marvarid.net/mp3/Rus/Gryaznyj_Ramires_-_Magnitude.mp3" , 
- "http://f.marvarid.net/mp3/Rus/Gazirovka_-_Black.mp3"
+ "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/none_given/Rolemusic/Rolemusic_-_Singles/Rolemusic_-_Step_to_Space.mp3",
+ "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Rolemusic/Rolemusic_-_Singles/Rolemusic_-_the_river.mp3"
  ];
+
+const bgm = document.getElementById("BgAudio"); 				//bgaudio
+bgm.volume = 0.1;
+bgm.src = list[0];
+
+const mute = document.getElementById("onoff");				//pocisk dla muzyki on/off
+let i = 1;
 
 const canvas = document.getElementById("MainCanvas");			//tworzenie canvas
 const ctx = canvas.getContext("2d");							//2d, t.z. plaszczyzna
@@ -37,7 +35,7 @@ const sizeFont = (canvas.width+canvas.height)/109;
 
 const ballRadius = (canvas.height)*0.017;						//rozmiar pilki
 let x = (canvas.width)/2;									//polozenia poczatkowe 
-let y = (canvas.height)-30;
+let y = (canvas.height)-50;
 let vx = (canvas.height)*0.004;								//predkosc dynamicznie zalezaca od rozmiaru okna
 let vy = -(canvas.height)*0.004;
 
@@ -143,8 +141,8 @@ function dotyk() {											//funkcja dotyku pilki do cegly
           b.temp = 0;
 		  playAudio();
 		  score++;
-		  if(score === ceglaColumnIlosc*ceglaWierszIlosc) {	//kiedy rozbijamy wszystki cegly to wygramy :)
-          alert("Gratulacji!");
+		  if(score === ceglaColumnIlosc*ceglaWierszIlosc) {	//kiedy rozbijamy wszystkie cegly to wygramy :)
+          alert("Gratulacje!");
           document.location.reload();
 		  }
         }
