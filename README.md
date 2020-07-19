@@ -1,5 +1,5 @@
 # rkdc
 
-## Stworzyłem Arkanoid
+## JS Arkanoid
 
 ![screenshot](final.png)
