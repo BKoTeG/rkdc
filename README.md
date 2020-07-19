@@ -2,4 +2,4 @@
 
 ## JS Arkanoid
 
-![screenshot](final.png)
+![screenshot](screenshot.png)
